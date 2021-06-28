@@ -15,7 +15,7 @@ let questions = ['Who was the first American woman in space? ',
 'What is the minimum crew size for the ISS? '];
 let correctAnswers = ["Sally Ride", "true", "40", "Trajectory", "3"];
 let candidateAnswers = [];
-
+let correctCandidateAnswers = [];
 
 function askForName() {
   // TODO 1.1b: Ask for candidate's name //
@@ -26,25 +26,35 @@ function askForName() {
 function askQuestion() {
   // TODO 1.2b: Ask candidate the question and assign the response as candidateAnswer //
   
-  for (let i = 0; i <= questions.length; i++) {
+  for (let i = 0; i <= 4; i++) {
     candidateAnswers[i] = input.question(questions[i]);
-    
+     if (candidateAnswers[i].toUpperCase() === correctAnswers[i].toUpperCase()) {
+       console.log(`You answered ${candidateAnswers[i]}`);
+       console.log(`Correct answer is ${correctAnswers[i]}`);
+      correctCandidateAnswers.push(candidateAnswers[i]);
+     }else {
+       console.log("Your answer is incorrect.")
+       console.log(`Correct answer is ${correctAnswers[i]}`);
+     }
   }  
-
-
 
 }
 
-function gradeQuiz(candidateAnswers) {
-
+// function gradeQuiz(candidateAnswers) { edit
+function gradeQuiz() {
   // TODO 1.2c: Let the candidate know if they have answered the question correctly or incorrectly // 
-  console.log(`You have answered ${candidateAnswers} and the correct answers are ${correctAnswers}`);
 
+  let grade = 0; 
 
-  let grade; 
-  
-
-  return grade;
+  //console.log(correctCandidateAnswers.length); correctCandidateAnswers check
+  grade = (correctCandidateAnswers.length/questions.length) * 100; 
+    //return grade; edit
+  //console.log(grade); grade check
+  if (grade >= 80) {
+    console.log("You passed with a score of ",grade);
+  }else {
+    console.log("You failed with a score of ",grade);
+  }
 }
 
 function runProgram() {
@@ -52,7 +62,8 @@ function runProgram() {
   // TODO 1.1c: Ask for candidate's name //
   console.log("Greetings " + candidateName);
   askQuestion();
-  gradeQuiz(this.candidateAnswers);
+  //gradeQuiz(this.candidateAnswers);
+  gradeQuiz(); //added
 }
 
 // Don't write any code below this line //
